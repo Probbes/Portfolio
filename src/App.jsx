@@ -1,35 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {Element} from "react-scroll"
+
+import Header from "./Header/Header"
+import Profil from "./Profil/Profil"
+import Portfolio from "./Portfolio/Portfolio"
+import CV from "./CV/CV"
+import Software from "./Software/Software"
+import Footer from "./Footer/Footer"
+
+import styles from "./App.module.css"
+import { useState } from "react"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-  return (
+  const [isEnglish, setIsEnglish] = useState(false)
+
+  const switchLang = () => {
+    setIsEnglish(!isEnglish);
+    console.log(isEnglish);
+  }
+
+  return(
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Header onLangChange={switchLang} isEnglish={isEnglish}/>
+    <div className={styles.main}>
+
+      <Element name="profil">
+        <Profil isEnglish={isEnglish}/>
+      </Element>
+
+      <Element name="portfolio">
+        <Portfolio isEnglish={isEnglish}/>
+      </Element>
+
+      <Element name="cv">
+        <CV isEnglish={isEnglish}/>
+      </Element>
+
+      <Software isEnglish={isEnglish}/>
+
+    </div>
+    <Footer isEnglish={isEnglish}/>
     </>
-  )
+  );
 }
 
 export default App
